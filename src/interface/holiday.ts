@@ -6,3 +6,7 @@ export interface IHoliday {
     regions: string[];
     types: string[];
 }
+
+export interface IListApiResponse {
+    holidays: IHoliday[]
+}

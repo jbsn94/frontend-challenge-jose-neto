@@ -8,6 +8,10 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { countryReducer } from '../store/country/country.reducer';
 import { holidayReducer } from 'src/store/holiday/holiday.reducer';
+
+//Http Module
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -18,7 +22,8 @@ import { holidayReducer } from 'src/store/holiday/holiday.reducer';
     StoreModule.forRoot({
       country: countryReducer,
       holiday: holidayReducer
-    }, {})
+    }, {}),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
