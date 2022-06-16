@@ -13,7 +13,7 @@ export class HolidayService {
     private http: HttpClient
   ) { }
 
-  list(country_code: string, year: string): Observable<IListApiResponse> {
+  list(country_code: string, year: string | number): Observable<IListApiResponse> {
     return this.http.post<IListApiResponse>(`${environment.url}/holidays/List`, { country_code, year }, {
       headers: {
         Authorization: `Bearer ${environment.key}`,

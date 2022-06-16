@@ -2,6 +2,7 @@
     padding: 40px;
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 mat-card, table {
@@ -14,6 +15,12 @@ mat-card-content.loading {
     justify-content: center;
 }
 
-.mat-row:hover {
-    cursor: pointer;
+.datepicker {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0px;
+}
+
+mat-chip-list {
+    margin: 5px;
 }

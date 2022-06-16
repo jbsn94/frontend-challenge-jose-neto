@@ -3,7 +3,7 @@ import { ISession } from 'src/interface/session';
 import { set } from './session.actions';
 
 export const initialState: ISession = {
-  isAuthenticated: true
+  isAuthenticated: false
 };
  
 export const sessionReducer = createReducer(

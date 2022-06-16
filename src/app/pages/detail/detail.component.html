@@ -1,0 +1,61 @@
+<div class="body">
+    <div class="datepicker">
+        <div>
+            <button mat-icon-button matTooltip="Back" (click)="back()">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+        </div>
+        <div class="p-field">
+            <p-calendar view="year" [touchUI]="true" [(ngModel)]="date" (onSelect)="changed()" dateFormat="yy" placeholder="Select the Year"></p-calendar>
+        </div>
+    </div>
+    <div>
+        <mat-card>
+            <mat-card-title>
+                The holidays for {{country?.name}} at {{date.getFullYear()}}
+            </mat-card-title>
+            <mat-card-content *ngIf="loading" class="loading">
+                <mat-spinner diameter="40"></mat-spinner>
+            </mat-card-content>
+            <mat-card-content>
+                <table mat-table [dataSource]="dataSource" class="w-full" *ngIf="!loading">
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="local_name">
+                        <mat-header-cell *matHeaderCellDef> Local name </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.local_name}} </mat-cell>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="date">
+                        <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="regions">
+                        <mat-header-cell *matHeaderCellDef> Regions </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> 
+                            <mat-chip-list>
+                                <mat-chip *ngFor="let region of element.regions"><small>{{region}}</small></mat-chip>
+                            </mat-chip-list>
+                        </mat-cell>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="types">
+                        <mat-header-cell *matHeaderCellDef> Types </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> 
+                            <mat-chip-list>
+                                <mat-chip *ngFor="let type of element.types"><small>{{type}}</small></mat-chip>
+                            </mat-chip-list>
+                        </mat-cell>
+                    </ng-container>
+    
+                    <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+                </table>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

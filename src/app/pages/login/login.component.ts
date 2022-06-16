@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ISession } from 'src/interface/session';
-import { set } from 'src/store/auth/session.actions';
+import { set } from 'src/store/session/session.actions';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   })
 
   constructor(
-    private store: Store<ISession>,
+    private store: Store<{session: ISession}>,
     private router: Router
   ) { }
 

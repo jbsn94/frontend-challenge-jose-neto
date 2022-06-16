@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { countryReducer } from '../store/country/country.reducer';
 import { holidayReducer } from 'src/store/holiday/holiday.reducer';
-import { sessionReducer } from 'src/store/auth/session.reducer';
+import { sessionReducer } from 'src/store/session/session.reducer';
 
 //Http Module
 import { HttpClientModule } from '@angular/common/http';
