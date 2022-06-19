@@ -13,7 +13,7 @@ import { set } from 'src/store/session/session.actions';
 export class LoginComponent implements OnInit {
 
   form = new FormGroup({
-    login: new FormControl('', [Validators.required]),
+    login: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   })
 
