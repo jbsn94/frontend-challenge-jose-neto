@@ -14,6 +14,7 @@ import { sessionReducer } from 'src/store/session/session.reducer';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ApiInterceptor } from './interceptor/api/api.interceptor';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ApiInterceptor } from './interceptor/api/api.interceptor';
       session: sessionReducer
     }, {}),
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    EffectsModule.forRoot([])
   ],
   providers: [
     {

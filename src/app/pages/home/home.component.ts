@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CountryService } from 'src/app/service/country/country.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { set } from 'src/store/country/country.actions';
+import { CountryActions } from 'src/store/actions';
 import { ICountry } from 'src/interface/country';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
     this.countryService.list()
     .subscribe({
       next: ({ countries }) => {
-        this.store.dispatch(set({ countries }));
+        this.store.dispatch(CountryActions.set({ countries }));
       },
       complete: () => {
         this.loading = false;
