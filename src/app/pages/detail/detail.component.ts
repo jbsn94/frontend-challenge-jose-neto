@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { HolidayService } from 'src/app/service/holiday/holiday.service';
 import { ICountry } from 'src/interface/country';
 import { IHoliday } from 'src/interface/holiday';
 import { findCountry } from 'src/store/country/country.selector';
-import { set } from 'src/store/holiday/holiday.actions';
+import { HolidayActions } from 'src/store/actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -20,10 +19,6 @@ export class DetailComponent implements OnInit {
   holidays: IHoliday[] = [];
   dataSource: IHoliday[] = [];
   columns: string[] = ['name', 'local_name', 'date', 'regions', 'types'];
-  length: number = 0;
-  page: number = 0;
-  pageSize: number = 20;
-  pageSizeOptions: number[] = [5, 10, 20, 50];
   loading = true;
   date = new Date()
   constructor(
@@ -56,7 +51,7 @@ export class DetailComponent implements OnInit {
     this.holidayService.list(this.code, this.date.getFullYear())
     .subscribe({
       next: ({ holidays }) => {
-        this.store.dispatch(set({ holidays }));
+        this.store.dispatch(HolidayActions.set({ holidays }));
       },
       complete: () => {
         this.loading = false;
