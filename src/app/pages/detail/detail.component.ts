@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { HolidayService } from 'src/app/service/holiday/holiday.service';
-import { ICountry } from 'src/interface/country';
+import { ICountry, ICountryStoreState } from 'src/interface/country';
 import { IHoliday } from 'src/interface/holiday';
-import { findCountry } from 'src/store/country/country.selector';
+import { findCountry } from 'src/store/selectors/country.selector';
 import { HolidayActions } from 'src/store/actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -22,7 +22,7 @@ export class DetailComponent implements OnInit {
   loading = true;
   date = new Date()
   constructor(
-    private store: Store<{country: ICountry[], holiday: IHoliday[]}>,
+    private store: Store<{country: ICountryStoreState, holiday: IHoliday[]}>,
     private route: ActivatedRoute,
     private router: Router,
     private holidayService: HolidayService,

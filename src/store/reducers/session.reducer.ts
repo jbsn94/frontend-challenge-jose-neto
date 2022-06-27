@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { ISession } from 'src/interface/session';
-import { set } from './session.actions';
+import { set } from '../actions/session.actions';
 
 export const initialState: ISession = {
   isAuthenticated: false

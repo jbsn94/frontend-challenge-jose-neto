@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { IHoliday } from 'src/interface/holiday';
-import { set } from './holiday.actions';
+import { set } from '../actions/holiday.actions';
 
 export const initialState: IHoliday[] = [];
  

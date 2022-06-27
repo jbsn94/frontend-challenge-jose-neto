@@ -3,11 +3,11 @@
         <mat-card-title>
             List of countries
         </mat-card-title>
-        <mat-card-content *ngIf="loading" class="loading">
+        <mat-card-content *ngIf="loading$ | async" class="loading">
             <mat-spinner diameter="40"></mat-spinner>
         </mat-card-content>
         <mat-card-content>
-            <table mat-table [dataSource]="dataSource" class="w-full" *ngIf="!loading">
+            <table mat-table [dataSource]="dataSource" class="w-full" *ngIf="!(loading$ | async)">
                 <ng-container matColumnDef="code">
                     <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
                     <mat-cell *matCellDef="let element"> {{element.code}} </mat-cell>
@@ -23,7 +23,7 @@
         </mat-card-content>
         <mat-card-footer>
             <mat-paginator
-                *ngIf="!loading" 
+                *ngIf="!(loading$ | async)" 
                 [length]="length" 
                 [pageSize]="pageSize" 
                 [pageSizeOptions]="pageSizeOptions"

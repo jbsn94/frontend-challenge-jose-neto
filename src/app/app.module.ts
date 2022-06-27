@@ -6,15 +6,16 @@ import { AppComponent } from './app.component';
 
 //Stores
 import { StoreModule } from '@ngrx/store';
-import { countryReducer } from '../store/country/country.reducer';
-import { holidayReducer } from 'src/store/holiday/holiday.reducer';
-import { sessionReducer } from 'src/store/session/session.reducer';
+import { countryReducer } from '../store/reducers/country.reducer';
+import { holidayReducer } from 'src/store/reducers/holiday.reducer';
+import { sessionReducer } from 'src/store/reducers/session.reducer';
 
 //Http Module
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ApiInterceptor } from './interceptor/api/api.interceptor';
 import { EffectsModule } from '@ngrx/effects';
+import { CountryEffects } from 'src/store/effects/country.effects';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { EffectsModule } from '@ngrx/effects';
     }, {}),
     HttpClientModule,
     BrowserAnimationsModule,
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([
+      CountryEffects
+    ])
   ],
   providers: [
     {

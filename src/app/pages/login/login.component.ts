@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ISession } from 'src/interface/session';
-import { set } from 'src/store/session/session.actions';
+import { set } from 'src/store/actions/session.actions';
 
 @Component({
   selector: 'app-login',

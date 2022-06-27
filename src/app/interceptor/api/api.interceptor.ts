@@ -16,7 +16,7 @@ export class ApiInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const clone = request.clone({
       setHeaders: {
-        Authorization: `Bearer ${environment.key}`,
+        //Authorization: `Bearer ${environment.key}`,
         'Content-Type': 'application/json'
       }
     });

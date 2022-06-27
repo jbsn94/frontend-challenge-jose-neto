@@ -3,9 +3,10 @@ import { CountryService } from 'src/app/service/country/country.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { CountryActions } from 'src/store/actions';
-import { ICountry } from 'src/interface/country';
+import { ICountry, ICountryStoreState } from 'src/interface/country';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { getLoading, getError } from 'src/store/selectors/country.selector';
 
 @Component({
   selector: 'app-home',
@@ -20,16 +21,16 @@ export class HomeComponent implements OnInit {
   page: number = 0;
   pageSize: number = 20;
   pageSizeOptions: number[] = [5, 10, 20, 50];
-  loading = true;
+  loading$ = this.store.select(getLoading());
 
   constructor(
     private countryService: CountryService,
     private snackBar: MatSnackBar,
-    private store: Store<{country: ICountry[]}>,
+    private store: Store<{country: ICountryStoreState}>,
     private router: Router
   ) {
     this.store.select('country')
-    .subscribe((countries) => {
+    .subscribe(({ countries }) => {
       this.countries = countries;
       this.length = this.countries.length;
       this.dataSource = this.countries.slice(this.page * this.pageSize, this.pageSize * (this.page + 1));
@@ -37,16 +38,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.countryService.list()
-    .subscribe({
-      next: ({ countries }) => {
-        this.store.dispatch(CountryActions.set({ countries }));
-      },
-      complete: () => {
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
+    this.store.dispatch(CountryActions.load());
+    this.store.select(getError()).subscribe((error) => {
+      if (error) {
         this.snackBar.open('We could not load the list of the countries.', 'Close', {
           horizontalPosition: 'end',
           verticalPosition: 'top',
