@@ -14,11 +14,6 @@ export class CountryService {
   ) { }
 
   list(): Observable<IListApiResponse> {
-    return this.http.post<IListApiResponse>(`${environment.url}/holidays/Countries`, {}, {
-      headers: {
-        Authorization: `Bearer ${environment.key}`,
-        'Content-Type': 'application/json'
-      }
-    })
+    return this.http.post<IListApiResponse>(`${environment.url}/holidays/Countries`, {});
   }
 }
