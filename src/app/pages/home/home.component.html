@@ -7,7 +7,7 @@
             <mat-spinner diameter="40"></mat-spinner>
         </mat-card-content>
         <mat-card-content>
-            <table mat-table [dataSource]="dataSource" class="w-full" *ngIf="!(loading$ | async)">
+            <table mat-table [dataSource]="countries$" class="w-full" *ngIf="!(loading$ | async)">
                 <ng-container matColumnDef="code">
                     <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
                     <mat-cell *matCellDef="let element"> {{element.code}} </mat-cell>
@@ -24,8 +24,8 @@
         <mat-card-footer>
             <mat-paginator
                 *ngIf="!(loading$ | async)" 
-                [length]="length" 
-                [pageSize]="pageSize" 
+                [length]="length$ | async" 
+                [pageSize]="size$ | async" 
                 [pageSizeOptions]="pageSizeOptions"
                 (page)="paginatorChanged($event)"
             ></mat-paginator>

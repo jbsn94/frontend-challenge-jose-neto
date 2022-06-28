@@ -1,45 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { CountryService } from 'src/app/service/country/country.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { CountryActions } from 'src/store/actions';
-import { ICountry, ICountryStoreState } from 'src/interface/country';
+import { CountryActions } from 'src/app/store/actions';
+import { ICountryStoreState } from 'src/interface/country';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
-import { getLoading, getError } from 'src/store/selectors/country.selector';
-
+import { CountrySelector } from 'src/app/store/selectors';
+import { paginator } from 'src/app/store/actions/country.actions';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  countries: ICountry[] = [];
-  dataSource: ICountry[] = [];
   columns: string[] = ['code', 'name'];
-  length: number = 0;
-  page: number = 0;
-  pageSize: number = 20;
+  length$ = this.store.select(CountrySelector.length());
+  size$ = this.store.select(CountrySelector.size());
   pageSizeOptions: number[] = [5, 10, 20, 50];
-  loading$ = this.store.select(getLoading());
+  loading$ = this.store.select(CountrySelector.loading());
+  countries$ = this.store.select(CountrySelector.countries());
 
   constructor(
-    private countryService: CountryService,
     private snackBar: MatSnackBar,
     private store: Store<{country: ICountryStoreState}>,
     private router: Router
   ) {
-    this.store.select('country')
-    .subscribe(({ countries }) => {
-      this.countries = countries;
-      this.length = this.countries.length;
-      this.dataSource = this.countries.slice(this.page * this.pageSize, this.pageSize * (this.page + 1));
-    });
   }
 
   ngOnInit(): void {
+    //Loading the data
     this.store.dispatch(CountryActions.load());
-    this.store.select(getError()).subscribe((error) => {
+
+    //Checking for errors
+    this.store.select(CountrySelector.error()).subscribe((error) => {
       if (error) {
         this.snackBar.open('We could not load the list of the countries.', 'Close', {
           horizontalPosition: 'end',
@@ -55,9 +48,7 @@ export class HomeComponent implements OnInit {
   }
 
   paginatorChanged(event: PageEvent) {
-    this.page = event.pageIndex;
-    this.pageSize = event.pageSize;
-    this.dataSource = this.countries.slice(this.page * this.pageSize, this.pageSize * (this.page + 1));
+    this.store.dispatch(paginator({ page: event.pageIndex, size: event.pageSize }));
   }
 
 }

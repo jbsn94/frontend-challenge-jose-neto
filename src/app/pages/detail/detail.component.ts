@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { HolidayService } from 'src/app/service/holiday/holiday.service';
 import { ICountry, ICountryStoreState } from 'src/interface/country';
 import { IHoliday } from 'src/interface/holiday';
-import { findCountry } from 'src/store/selectors/country.selector';
-import { HolidayActions } from 'src/store/actions';
+import { CountrySelector } from 'src/app/store/selectors';
+import { HolidayActions } from 'src/app/store/actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -32,7 +32,7 @@ export class DetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.select(findCountry(this.code)).subscribe((country) => {
+    this.store.select(CountrySelector.find(this.code)).subscribe((country) => {
       if (country) {
         this.country = country;
       }

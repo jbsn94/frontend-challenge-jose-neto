@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ISession } from 'src/interface/session';
-import { set } from 'src/store/actions/session.actions';
+import { set } from 'src/app/store/actions/session.actions';
 
 @Component({
   selector: 'app-app',
