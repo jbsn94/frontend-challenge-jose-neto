@@ -14,11 +14,11 @@
             <mat-card-title>
                 The holidays for {{country?.name}} at {{date.getFullYear()}}
             </mat-card-title>
-            <mat-card-content *ngIf="loading" class="loading">
+            <mat-card-content *ngIf="loading | async" class="loading">
                 <mat-spinner diameter="40"></mat-spinner>
             </mat-card-content>
             <mat-card-content>
-                <table mat-table [dataSource]="dataSource" class="w-full" *ngIf="!loading">
+                <table mat-table [dataSource]="dataSource" class="w-full" *ngIf="!(loading | async)">
                     <ng-container matColumnDef="name">
                         <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
                         <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>

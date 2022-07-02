@@ -7,6 +7,12 @@ export interface IHoliday {
     types: string[];
 }
 
+export interface IHolidayStoreState {
+    holidays: IHoliday[];
+    loading: boolean;
+    error: boolean;
+}
+
 export interface IListApiResponse {
     holidays: IHoliday[]
 }

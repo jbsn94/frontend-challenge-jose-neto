@@ -14,8 +14,11 @@ import { sessionReducer } from 'src/app/store/reducers/session.reducer';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ApiInterceptor } from './interceptor/api/api.interceptor';
+
+//Effects
 import { EffectsModule } from '@ngrx/effects';
 import { CountryEffects } from 'src/app/store/effects/country.effects';
+import { HolidayEffects } from './store/effects/holiday.effects';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { CountryEffects } from 'src/app/store/effects/country.effects';
     HttpClientModule,
     BrowserAnimationsModule,
     EffectsModule.forRoot([
-      CountryEffects
+      CountryEffects,
+      HolidayEffects
     ])
   ],
   providers: [
